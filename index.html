@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>카카오임팩트 8주년 — 여덟 번째 봄</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;400;700;900&family=Pretendard+Variable:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #EDEADF;
+  --warm-white: #F5F2EA;
+  --parchment: #E8E4D9;
+  --kakao-yellow: #FEE500;
+  --warm-orange: #E8730E;
+  --deep-brown: #2C1810;
+  --soft-brown: #6B4D3A;
+  --mint: #5BC8AC;
+  --teal: #3AAFA9;
+  --lavender: #C8B6E2;
+  --sky-blue: #7EC8E3;
+  --soft-pink: #F4B8C1;
+  --slate: #4A4A4A;
+  --light-gray: #DDD8CC;
+  --bubble-yellow: #FEE500;
+  --bubble-yellow: #F0EDE5;
+
+  --season-founding: #F0E6D3;
+  --season-1: #E8EDE4;
+  --season-2: #E4E8ED;
+  --season-3: #EDE4E8;
+  --season-8th: #FFF8E1;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+  background: var(--cream);
+  color: var(--deep-brown);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+.serif { font-family: 'Noto Serif KR', serif; }
+h1, h2, h3 { font-family: 'Noto Serif KR', serif; }
+
+/* ── Reveal ── */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(.25,.46,.45,.94), transform 0.9s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .15s; }
+.reveal-delay-2 { transition-delay: .3s; }
+.reveal-delay-3 { transition-delay: .45s; }
+.reveal-delay-4 { transition-delay: .6s; }
+
+/* ── Nav ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1rem 2rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(237,234,223,0.88);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(44,24,16,0.06);
+  transition: transform 0.4s ease;
+}
+.nav-logo { font-family: 'Noto Serif KR', serif; font-weight: 700; font-size: 0.9rem; color: var(--deep-brown); }
+.nav-links { display: flex; gap: 1.6rem; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--soft-brown); font-size: 0.8rem; font-weight: 500; transition: color .3s; }
+.nav-links a:hover { color: var(--warm-orange); }
+@media (max-width: 768px) { .nav-links { display: none; } }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center; padding: 6rem 2rem 4rem;
+  background: linear-gradient(180deg, var(--warm-white) 0%, var(--parchment) 100%);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(254,229,0,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(91,200,172,0.06) 0%, transparent 60%);
+  animation: heroGlow 12s ease-in-out infinite alternate;
+}
+@keyframes heroGlow { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(-3%,2%) scale(1.05); } }
+
+/* Decorative sticker dots */
+.hero-deco { position: absolute; border-radius: 50%; opacity: 0.15; }
+.hero-deco-1 { width: 120px; height: 120px; background: var(--kakao-yellow); top: 15%; left: 8%; }
+.hero-deco-2 { width: 80px; height: 80px; background: var(--mint); top: 25%; right: 12%; }
+.hero-deco-3 { width: 60px; height: 60px; background: var(--lavender); bottom: 20%; left: 15%; }
+.hero-deco-4 { width: 40px; height: 40px; background: var(--soft-pink); bottom: 30%; right: 20%; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .5rem 1.2rem; border: 1px solid rgba(44,24,16,0.15); border-radius: 100px;
+  font-size: .8rem; font-weight: 500; color: var(--soft-brown);
+  margin-bottom: 2.5rem; position: relative; z-index: 1;
+}
+.hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--warm-orange); }
+.hero h1 {
+  font-size: clamp(3rem,8vw,7rem); font-weight: 900; line-height: 1.1;
+  letter-spacing: -0.04em; margin-bottom: 1.5rem; position: relative; z-index: 1;
+}
+.hero h1 em { font-style: normal; color: var(--warm-orange); }
+.hero-sub {
+  font-family: 'Noto Serif KR', serif; font-size: clamp(1rem,2.5vw,1.4rem); font-weight: 200;
+  color: var(--soft-brown); line-height: 1.8; max-width: 600px; margin-bottom: 3rem; position: relative; z-index: 1;
+}
+.hero-date { font-size: .85rem; font-weight: 500; color: var(--slate); letter-spacing: .15em; position: relative; z-index: 1; }
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  color: var(--soft-brown); font-size: .7rem; letter-spacing: .1em;
+}
+.hero-scroll .line { width: 1px; height: 40px; background: var(--soft-brown); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100% { opacity: .3; transform: scaleY(.6); } 50% { opacity: 1; transform: scaleY(1); } }
+
+/* ── Chapter Divider (카톡 공지 스타일) ── */
+.chapter-divider {
+  padding: 4rem 2rem; text-align: center; position: relative;
+  margin: 2rem auto; max-width: 600px;
+}
+.chapter-number { font-size: .7rem; font-weight: 500; letter-spacing: .15em; color: var(--soft-brown); margin-bottom: .8rem; text-transform: uppercase; }
+.chapter-years { font-family: 'Noto Serif KR', serif; font-size: 1rem; font-weight: 400; color: var(--soft-brown); margin-bottom: .8rem; }
+.chapter-title {
+  font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 900; line-height: 1.2;
+  letter-spacing: -0.03em; margin-bottom: 1rem;
+  background: rgba(254,229,0,0.2); display: inline-block; padding: .3rem 1rem; border-radius: 8px;
+}
+.chapter-keyword {
+  display: inline-block; padding: .35rem 1rem; border: 1.5px solid var(--kakao-yellow);
+  border-radius: 100px; font-size: .8rem; font-weight: 600; color: var(--soft-brown);
+  background: rgba(254,229,0,0.1);
+}
+.chapter-desc { max-width: 480px; margin: 1rem auto 0; font-size: .9rem; line-height: 1.7; color: var(--slate); }
+
+/* ── Content Section ── */
+.content-section { padding: 0 2rem; max-width: 700px; margin: 0 auto; }
+
+/* ── Event Block (카톡 타임라인) ── */
+.event-block { margin-bottom: 2.5rem; }
+.event-header { display: none; }
+
+/* 날짜 구분선 */
+.date-divider {
+  display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+}
+.date-divider::before, .date-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--light-gray);
+}
+.date-divider span {
+  font-size: .72rem; font-weight: 500; color: var(--soft-brown);
+  background: var(--cream); padding: .25rem .8rem;
+  border-radius: 100px; border: 1px solid var(--light-gray);
+  white-space: nowrap;
+}
+
+/* ── Kakao Chat Bubble ── */
+.comment-bubble {
+  display: flex; align-items: flex-start; gap: .6rem;
+  padding: .3rem 0 .5rem; max-width: 500px;
+}
+.bubble-avatar {
+  width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+  background: var(--kakao-yellow);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+}
+.bubble-body { max-width: 400px; }
+.bubble-name { font-size: .78rem; font-weight: 600; color: var(--soft-brown); margin-bottom: .3rem; }
+.bubble-text {
+  display: inline-block; padding: .65rem 1rem;
+  font-size: .92rem; line-height: 1.65;
+  font-family: 'Noto Serif KR', serif; font-weight: 400;
+  background: var(--kakao-yellow); color: var(--deep-brown);
+}
+
+/* 좌측 (상대방): 프로필 왼쪽, 꼭지 왼쪽 */
+.msg-left .comment-bubble { flex-direction: row; }
+.msg-left .bubble-name { text-align: left; }
+.msg-left .bubble-text { border-radius: 2px 16px 16px 16px; }
+
+/* 우측 (나): 프로필 오른쪽, 꼭지 오른쪽 */
+.msg-right .comment-bubble { flex-direction: row-reverse; margin-left: auto; }
+.msg-right .bubble-name { text-align: right; }
+.msg-right .bubble-text { border-radius: 16px 2px 16px 16px; }
+
+/* ── Photo Grid ── */
+.photo-grid-3 {
+  display: grid; grid-template-columns: 1fr 1fr; gap: .3rem;
+  max-width: 420px; border-radius: 14px; overflow: hidden; margin-bottom: .5rem;
+}
+.photo-grid-3 .photo-item:first-child { grid-column: 1 / -1; }
+.photo-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: .3rem; max-width: 420px; border-radius: 14px; overflow: hidden; margin-bottom: .5rem; }
+.photo-grid-1 { max-width: 420px; border-radius: 14px; overflow: hidden; margin-bottom: .5rem; }
+
+/* 좌측 메시지 → 사진 왼쪽 정렬 (프로필 너비만큼 들여쓰기) */
+.msg-left .photo-grid-3,
+.msg-left .photo-grid-2,
+.msg-left .photo-grid-1 { margin-left: 46px; margin-right: auto; }
+
+/* 우측 메시지 → 사진 오른쪽 정렬 */
+.msg-right .photo-grid-3,
+.msg-right .photo-grid-2,
+.msg-right .photo-grid-1 { margin-left: auto; margin-right: 0; }
+
+.photo-item {
+  position: relative; overflow: hidden;
+  background: var(--light-gray); line-height: 0;
+}
+.photo-item img {
+  width: 100%; height: auto; display: block; object-fit: contain;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+  background: var(--light-gray);
+}
+.photo-item:hover img { transform: scale(1.02); }
+
+/* ── News Card with Link ── */
+.news-card {
+  background: white; border: 1px solid var(--light-gray); border-radius: 10px;
+  padding: 1.3rem 1.6rem; margin: 1.5rem 0;
+  display: flex; align-items: flex-start; gap: 1rem;
+  transition: box-shadow .3s, transform .2s;
+  text-decoration: none; color: inherit;
+}
+a.news-card:hover { box-shadow: 0 4px 20px rgba(44,24,16,0.08); transform: translateY(-2px); }
+.msg-left + .news-card, .msg-left ~ .news-card { margin-left: 46px; margin-right: auto; }
+.msg-right + .news-card, .event-block.msg-right ~ .news-card { margin-left: auto; margin-right: 0; }
+.news-tag {
+  flex-shrink: 0; font-size: .65rem; font-weight: 600; letter-spacing: .06em;
+  color: white; padding: .25rem .6rem; border-radius: 4px; margin-top: .15rem;
+}
+.news-tag.tag-history { background: var(--mint); }
+.news-tag.tag-news { background: var(--warm-orange); }
+.news-tag.tag-year { background: var(--lavender); color: var(--deep-brown); }
+.news-content h4 { font-family: 'Noto Serif KR', serif; font-size: .92rem; font-weight: 700; line-height: 1.5; margin-bottom: .3rem; }
+.news-content p { font-size: .8rem; color: var(--slate); line-height: 1.6; }
+
+/* ── Stats ── */
+.stats-section { padding: 6rem 2rem; text-align: center; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2.5rem; max-width: 900px; margin: 0 auto; }
+.stat-item .stat-number {
+  font-family: 'Noto Serif KR', serif; font-size: clamp(2.5rem,5vw,3.5rem);
+  font-weight: 900; color: var(--warm-orange); line-height: 1; margin-bottom: .5rem;
+}
+.stat-item .stat-label { font-size: .82rem; color: var(--soft-brown); font-weight: 500; line-height: 1.5; }
+
+/* ── Outro ── */
+.outro {
+  padding: 8rem 2rem; text-align: center;
+  background: linear-gradient(180deg, var(--parchment) 0%, var(--cream) 100%);
+  position: relative;
+}
+.outro h2 { font-size: clamp(2rem,5vw,3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 1.5rem; letter-spacing: -0.03em; }
+.outro p { font-family: 'Noto Serif KR', serif; font-size: 1.1rem; font-weight: 200; line-height: 2; color: var(--soft-brown); max-width: 500px; margin: 0 auto 3rem; }
+.outro-date { font-size: .8rem; letter-spacing: .15em; color: var(--slate); }
+
+/* ── Footer ── */
+.footer { padding: 2rem; text-align: center; font-size: .75rem; color: var(--soft-brown); border-top: 1px solid var(--light-gray); }
+
+/* ── Timeline connector ── */
+.timeline-line { width: 1px; height: 60px; background: linear-gradient(to bottom, transparent, var(--light-gray), transparent); margin: 0 auto; }
+
+/* ── Decorative sticker elements (CSS-drawn) ── */
+.sticker-star {
+  display: inline-block; width: 24px; height: 24px; position: relative;
+}
+.sticker-star::before {
+  content: '✦'; font-size: 20px; color: var(--mint); position: absolute; top: 0; left: 0;
+}
+
+/* Chapter decorative accents */
+.chapter-divider .chapter-accent {
+  display: flex; gap: .5rem; justify-content: center; margin-top: 1.2rem;
+}
+.chapter-accent span {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .photo-grid-3 { max-width: 500px; grid-template-columns: 1fr; }
+  .photo-grid-3 .photo-item:first-child { grid-column: auto; }
+  .photo-grid-2 { grid-template-columns: 1fr; }
+  .event-header { flex-direction: column; gap: .3rem; }
+  .news-card { flex-direction: column; }
+  .chapter-divider { padding: 5rem 1.5rem; }
+  .content-section { padding: 0 1rem; }
+  .comment-bubble { max-width: 100%; }
+  .bubble-body { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav">
+  <div class="nav-logo">카카오임팩트 8주년</div>
+  <ul class="nav-links">
+    <li><a href="#founding">설립기</a></li>
+    <li><a href="#season1">시즌1</a></li>
+    <li><a href="#season2">시즌2</a></li>
+    <li><a href="#season3">시즌3</a></li>
+    <li><a href="#year8">8주년</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-deco hero-deco-3"></div>
+  <div class="hero-deco hero-deco-4"></div>
+  <div class="hero-badge reveal"><span></span>2018.04.10 — 2026.04.10</div>
+  <h1 class="reveal reveal-delay-1">카카오임팩트<br><em>8</em>주년</h1>
+  <p class="hero-sub reveal reveal-delay-2">유연하고 순발력있고<br>지속가능하고 임팩트하게</p>
+  <p class="hero-date reveal reveal-delay-3">여덟 번째 봄을 맞이하며</p>
+  <div class="hero-scroll"><div class="line"></div><span>Scroll</span></div>
+</section>
+
+<!-- ═══════════ Chapter 1: 설립기 ═══════════ -->
+<section id="founding">
+  <div class="chapter-divider reveal" style="background: var(--season-founding);">
+    <p class="chapter-number">Chapter 01</p>
+    <p class="chapter-years">2018 — 2019</p>
+    <h2 class="chapter-title">시작의 봄</h2>
+    <span class="chapter-keyword">先조직 後사업</span>
+    <p class="chapter-desc">재단 DNA를 고민하며 다양한 실험을 시작하다.<br>프로젝트100, 100up — 질문에서 출발한 여정.</p>
+    <div class="chapter-accent"><span style="background:var(--kakao-yellow)"></span><span style="background:var(--mint)"></span><span style="background:var(--lavender)"></span></div>
+  </div>
+
+  <div class="content-section">
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2018. 05</span></div>
+      <div class="event-header">
+        <span class="event-date">2018. 05</span>
+        <span class="event-name">창립 첫 이사회</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🌱</div>
+        <div class="bubble-body">
+          <div class="bubble-name">카카오임팩트 이사회</div>
+          <div class="bubble-text">카카오임팩트 첫 이사회!<br>"어떻게 하면 더 나은 세상을 만들 수 있을까?"</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1JkZTEXsVVLm91iv7-EovfFCyeq9d0xG0" alt="창립 첫 이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1znx0Y3iL0qYBNrOGd7yt2JatUNlFd26C" alt="첫 이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1iPkFccKlPYdbqP4LD2nlTk3120UcsSmb" alt="첫 이사회" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2018. 08</span></div>
+      <div class="event-header">
+        <span class="event-date">2018. 08</span>
+        <span class="event-name">이사회</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">❓</div>
+        <div class="bubble-body">
+          <div class="bubble-name">카카오임팩트 이사회</div>
+          <div class="bubble-text">2018, "질문하는 재단"의 시작은 이사회에서 나온 '질문들'</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1l-2_L80_UtfCOb6kGSJ8RukIz2WmZkrQ" alt="이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/12C29k_-jYvw__Vtlw_GzdNMasuIvlva4" alt="이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/11AaJhCctqG6pYHvGy5B7kNSpuFGY0RpQ" alt="이사회" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=81" target="_blank">
+      <span class="news-tag tag-history">히스토리</span>
+      <div class="news-content">
+        <h4>100일 인증 챌린지 '프로젝트100' · 문제정의 플랫폼 '100up' 진행</h4>
+        <p>재단 설립 첫해, 사회 문제를 발견하고 정의하는 실험들이 시작되었습니다. →</p>
+      </div>
+    </a>
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=42" target="_blank">
+      <span class="news-tag tag-year">2019</span>
+      <div class="news-content">
+        <h4>2019 크리에이터스데이 행사 개최</h4>
+        <p>사회혁신가들이 모여 서로의 이야기를 나누는 첫 번째 자리. →</p>
+      </div>
+    </a>
+  </div>
+  <div class="timeline-line"></div>
+</section>
+
+<!-- ═══════════ Chapter 2: 시즌1 ═══════════ -->
+<section id="season1">
+  <div class="chapter-divider reveal" style="background: var(--season-1);">
+    <p class="chapter-number">Chapter 02</p>
+    <p class="chapter-years">2020 — 2021</p>
+    <h2 class="chapter-title">돕는 사람을 돕는 재단</h2>
+    <span class="chapter-keyword">시즌1 · 돕는사람</span>
+    <p class="chapter-desc">'돕는 사람' 관점에서 펠로우십을 기획하다.<br>사회혁신가의 찐팬이 되는 여정의 시작.</p>
+    <div class="chapter-accent"><span style="background:var(--mint)"></span><span style="background:var(--kakao-yellow)"></span><span style="background:var(--soft-pink)"></span></div>
+  </div>
+
+  <div class="content-section">
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2021. 02</span></div>
+      <div class="event-header">
+        <span class="event-date">2021. 02</span>
+        <span class="event-name">카카오임팩트 펠로우십 1기</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🎉</div>
+        <div class="bubble-body">
+          <div class="bubble-name">카카오임팩트 펠로우십</div>
+          <div class="bubble-text">두둥, 카카오임팩트 펠로우십 1기 출범!</div>
+        </div>
+      </div>
+      <div class="photo-grid-1">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1DSR64C8XqhauRNHukwl4rozOwijKqEVc" alt="펠로우십 1기" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=122" target="_blank">
+      <span class="news-tag tag-history">히스토리</span>
+      <div class="news-content">
+        <h4>카카오임팩트 펠로우십 1기 → 2기 → 3기</h4>
+        <p>2019년 '확성기 펠로우십' 기획에서 시작된 아이디어가 정식 프로그램으로 자리잡다. →</p>
+      </div>
+    </a>
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=122" target="_blank">
+      <span class="news-tag tag-news">보도</span>
+      <div class="news-content">
+        <h4>더 나은 세상을 만드는 '사회혁신가의 찐팬'이 되는 방법</h4>
+        <p>펠로우십이 지향하는 가치 — 사회혁신가를 돕는 사람이 되는 것. →</p>
+      </div>
+    </a>
+  </div>
+  <div class="timeline-line"></div>
+</section>
+
+<!-- ═══════════ Chapter 3: 시즌2 ═══════════ -->
+<section id="season2">
+  <div class="chapter-divider reveal" style="background: var(--season-2);">
+    <p class="chapter-number">Chapter 03</p>
+    <p class="chapter-years">2022 — 2023</p>
+    <h2 class="chapter-title">기술로 상생하다</h2>
+    <span class="chapter-keyword">시즌2 · 기술 상생</span>
+    <p class="chapter-desc">'상생' 키워드 강화, '돕는기술' 키워드 개발.<br>단골시장 100개, 대통령상 수상. 테크포임팩트 런칭.</p>
+    <div class="chapter-accent"><span style="background:var(--sky-blue)"></span><span style="background:var(--kakao-yellow)"></span><span style="background:var(--mint)"></span></div>
+  </div>
+
+  <div class="content-section">
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2022. 04</span></div>
+      <div class="event-header">
+        <span class="event-date">2022. 04</span>
+        <span class="event-name">이사회 — 시즌2 시작</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🤝</div>
+        <div class="bubble-body">
+          <div class="bubble-name">카카오임팩트 이사회</div>
+          <div class="bubble-text">이사회 시즌2 시작! 기술 기반의 '상생'을 논의하다</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1sgnRK163kq9S3VlVdfAKyUnqK86zCCNz" alt="이사회 시즌2" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1x6ecf9rrpYavgd5nmlYSGrjI3E18KfHr" alt="이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1cDFzpILPrR8Mg9CKrmjVn0uPTif3aU6T" alt="이사회" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=87" target="_blank">
+      <span class="news-tag tag-history">히스토리</span>
+      <div class="news-content">
+        <h4>펠로우십 브라이언임팩트로 이관 결정 (2022.01)</h4>
+        <p>펠로우십이 더 큰 날개를 달 수 있도록, 브라이언임팩트에 바통을 넘기다. →</p>
+      </div>
+    </a>
+
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2022. 06</span></div>
+      <div class="event-header">
+        <span class="event-date">2022. 06</span>
+        <span class="event-name">우리동네 단골시장 발대식</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🏪</div>
+        <div class="bubble-body">
+          <div class="bubble-name">우리동네 단골시장</div>
+          <div class="bubble-text">카카오임팩트 상생사업의 첫 시작, '우리동네 단골시장'</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1ebgwpLA9ZkQIpFlhYZSKf1oWuyFPVe8p" alt="단골시장 발대식" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1UoOOR3GB_Rvb0158zohVyDoGDlhfYZNQ" alt="단골시장" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/10ihq2gUDTaEJ8a-1zYfE48_dVqkbi2Pm" alt="단골시장" loading="lazy"></div>
+      </div>
+    </div>
+
+    
+
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2023. 07</span></div>
+      <div class="event-header">
+        <span class="event-date">2023. 07</span>
+        <span class="event-name">20개 시장 발대식</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">💯</div>
+        <div class="bubble-body">
+          <div class="bubble-name">우리동네 단골시장 시즌2</div>
+          <div class="bubble-text">22년에 11개이던 우리동네 단골시장이, 23년에 100개 시장으로!</div>
+        </div>
+      </div>
+      <div class="photo-grid-1">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1AhjBcheFBQ9FogMdb1ojvxweeJYb3PKr" alt="20개 시장 발대식" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=107" target="_blank">
+      <span class="news-tag tag-news">보도</span>
+      <div class="news-content">
+        <h4>카카오임팩트, '전통시장 활성화'로 대통령상 수상 🏆</h4>
+        <p>전통시장 디지털 전환을 통한 상생의 가치를 인정받다. →</p>
+      </div>
+    </a>
+
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2023. 09</span></div>
+      <div class="event-header">
+        <span class="event-date">2023. 09</span>
+        <span class="event-name">테크포임팩트 캠퍼스 첫 시작</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🎓</div>
+        <div class="bubble-body">
+          <div class="bubble-name">테크포임팩트 캠퍼스</div>
+          <div class="bubble-text">기술로 사회문제를 해결하는 인재 양성을 위해 KAIST와 손잡다</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1IrdI4LnfZkwi1-etNz3eelmi2NNDTGFQ" alt="테크포임팩트 캠퍼스" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1ersS07lDOaCricocvQRZvWEbqr2GM4KV" alt="캠퍼스" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/19142sDVIUVou377zI1zmgxKBl4mym95a" alt="캠퍼스" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=87" target="_blank">
+      <span class="news-tag tag-news">보도</span>
+      <div class="news-content">
+        <h4>카카오임팩트, KAIST와 '사회문제 해결 기여를 위한 기술 생태계 조성' 업무 협약 체결</h4>
+        <p>기술과 사회혁신의 연결고리를 만들어가는 첫 걸음. →</p>
+      </div>
+    </a>
+
+
+
+    
+
+
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2023. 12</span></div>
+      <div class="event-header">
+        <span class="event-date">2023. 12</span>
+        <span class="event-name">테크포임팩트 커넥트데이</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🔗</div>
+        <div class="bubble-body">
+          <div class="bubble-name">테크포임팩트 커넥트데이</div>
+          <div class="bubble-text">사회문제 해결을 가속화하는 기술을 찾고 지원하는 사업, 테크포임팩트의 시작!</div>
+        </div>
+      </div>
+      <div class="photo-grid-2">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1Kyb8r5El4pvtAoeMrqRr2rUXt7WFywcZ" alt="커넥트데이" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1l00Jy1HmYkMYHzlpTm5DneDgJK7s6XiY" alt="커넥트데이" loading="lazy"></div>
+              </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=116" target="_blank">
+      <span class="news-tag tag-news">보도</span>
+      <div class="news-content">
+        <h4>카카오임팩트, '테크포임팩트 커넥트데이' 진행</h4>
+        <p>사회문제 해결을 가속화하는 기술을 찾고 지원하는 테크포임팩트의 첫 커넥트데이. →</p>
+      </div>
+    </a>
+
+
+  </div>
+  <div class="timeline-line"></div>
+</section>
+
+<!-- ═══════════ Chapter 4: 시즌3 ═══════════ -->
+<section id="season3">
+  <div class="chapter-divider reveal" style="background: var(--season-3);">
+    <p class="chapter-number">Chapter 04</p>
+    <p class="chapter-years">2024 —</p>
+    <h2 class="chapter-title">돕는 사람, 돕는 AI</h2>
+    <span class="chapter-keyword">시즌3 · 돕는 AI</span>
+    <p class="chapter-desc">테크포임팩트 강화, 시니어디지털스쿨, 사각사각 페이스쿨.<br>기술이 사람을 돕는 새로운 시대를 열다.</p>
+    <div class="chapter-accent"><span style="background:var(--lavender)"></span><span style="background:var(--kakao-yellow)"></span><span style="background:var(--mint)"></span></div>
+  </div>
+
+  <div class="content-section">
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2024. 06</span></div>
+      <div class="event-header">
+        <span class="event-date">2024. 06</span>
+        <span class="event-name">사각사각 페이스쿨 · 페이티처 1기 발대식</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">📱</div>
+        <div class="bubble-body">
+          <div class="bubble-name">사각사각 페이스쿨</div>
+          <div class="bubble-text">시니어의 디지털 금융 리터러시가 카카오임팩트와 함께 성장하도록</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1QIgcceTvTRQmSAmQYAahHEWHUBlx5cke" alt="페이스쿨" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1ie4nlTeqiXkpG3jd9S5hd6_NZ7xBRrLI" alt="페이스쿨" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1RvjxL1AyiDm4tVJ-unIlL0nwq2Xa-axI" alt="페이스쿨" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2024. 08</span></div>
+      <div class="event-header">
+        <span class="event-date">2024. 08</span>
+        <span class="event-name">이사회 — 시즌3 시작</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🚀</div>
+        <div class="bubble-body">
+          <div class="bubble-name">카카오임팩트 이사회</div>
+          <div class="bubble-text">기술로 사회 변화를 만드는 재단을 위해 카카오임팩트 이사회 시즌3 시작!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1cvJsu2_LXu2dgPLtwrTGYkwG18E8wAmU" alt="시즌3 이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1jGhycoBVQGOrbM--U-UsDAziOYPLJIhx" alt="이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1TGMddSzgViiDDvPNmhuitn3LY0a6tZO7" alt="이사회" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2024. 09</span></div>
+      <div class="event-header">
+        <span class="event-date">2024. 09</span>
+        <span class="event-name">테크포임팩트 캠퍼스 개강캠프</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🎒</div>
+        <div class="bubble-body">
+          <div class="bubble-name">테크포임팩트 캠퍼스</div>
+          <div class="bubble-text">테크포임팩트 캠퍼스의 두번째 학기, KAIST와 개강캠프로 시작!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1uroZ-XCT-OCkz4M4JAUg7NQaCe_I8uKR" alt="개강캠프" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/10mS8aCUIIOIPru7OfuN7X894e8NNcYfA" alt="캠프" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1o2CAyOBtfCio9IrQ2NDIpAR1RBwZ5fbD" alt="캠프" loading="lazy"></div>
+      </div>
+    </div>
+
+
+
+    <!-- 사이좋은 디지털세상 -->
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2024. 12</span></div>
+      <div class="event-header">
+        <span class="event-date">2024. 12</span>
+        <span class="event-name">사이좋은 디지털 세상 · 10년의 여정</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">👦</div>
+        <div class="bubble-body">
+          <div class="bubble-name">사이좋은 디지털세상</div>
+          <div class="bubble-text">청소년 디지털 시민교육 10년, 25만명의 어린이들과 만나다!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1b232Mp8LuoJVQHN6gYl2upY8kMJ5mUcZ" alt="사이좋은 디지털 세상 메인" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/14E3jNzXZzjqYMuthzDUhLfI9NbHEoCGo" alt="사이좋은 디지털 세상" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1qj5agnTFLEpoelZtmAZQG86-8tYkII5y" alt="사이좋은 디지털 세상" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=166" target="_blank">
+      <span class="news-tag tag-news">보도</span>
+      <div class="news-content">
+        <h4>'사이좋은 디지털 세상' 10년간 25만 아이들에 교육</h4>
+        <p>청소년 디지털 시민교육 10년 — 카카오가 바꾼 것들. →</p>
+      </div>
+    </a>
+
+
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2025. 03</span></div>
+      <div class="event-header">
+        <span class="event-date">2025. 03</span>
+        <span class="event-name">테크포임팩트 Lab 커넥트데이</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">✨</div>
+        <div class="bubble-body">
+          <div class="bubble-name">테크포임팩트 LAB</div>
+          <div class="bubble-text">테크포임팩트 LAB의 첫 결과물을 자랑하고, 연결되는 날 : 커넥트데이!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1Jx6Fcu_XwtB7zA0q_buhsvENBRR0aA9e" alt="커넥트데이" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/15-ZmzfYnFSjI7FL8AmPQrlHnOp8wgX2Z" alt="커넥트데이" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/19kFinrCWstYKq_IW8fVFBuGv1zmyPyjo" alt="커넥트데이" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2025. 06</span></div>
+      <div class="event-header"><span class="event-date">2025. 06</span><span class="event-name">찾아가는 시니어디지털스쿨</span></div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">👴</div>
+        <div class="bubble-body">
+          <div class="bubble-name">찾아가는 시니어디지털스쿨</div>
+          <div class="bubble-text">시니어 디지털 튜터 명함받고, 제2의 커리어 시작해요!</div>
+        </div>
+      </div>
+      <div class="photo-grid-2">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1LF5rUZ8cUEXtHYLuim9Huk5S09kL-JDx" alt="시니어디지털스쿨" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/197rejnJ6lyH_U56lOo8dn9XlVmiXlEGe" alt="시니어디지털스쿨" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=209" target="_blank">
+      <span class="news-tag tag-news">보도</span>
+      <div class="news-content">
+        <h4>2025 '찾아가는 시니어 디지털 스쿨' 시니어티처 발대식 개최</h4>
+        <p>시니어의 디지털 역량 강화를 위한 시니어티처 양성 시작. →</p>
+      </div>
+    </a>
+
+
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2025. 08</span></div>
+      <div class="event-header">
+        <span class="event-date">2025. 08</span>
+        <span class="event-name">돕는 AI 컨퍼런스</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🤖</div>
+        <div class="bubble-body">
+          <div class="bubble-name">돕는AI 컨퍼런스</div>
+          <div class="bubble-text">돕는 AI를 세상에 알리는 자리 : 사회적가치페스타 최고 인기 부스!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1z3uzMOgJtGRaY2zqJo7fMGCZlblVjKfM" alt="컨퍼런스" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1b2-Viq-LjTz1hrec5KKxsiWmPmuM_Hzi" alt="돕는 AI 컨퍼런스" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1Wa4bo0LndnINZtftp8XAPWpX_tbpM-BY" alt="컨퍼런스" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2025. 08</span></div>
+      <div class="event-header">
+        <span class="event-date">2025. 08</span>
+        <span class="event-name">2025 테크포임팩트 캠퍼스 2학기 개강워크샵</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🏫</div>
+        <div class="bubble-body">
+          <div class="bubble-name">테크포임팩트 캠퍼스</div>
+          <div class="bubble-text">같이 하는 학교가 다섯개로 늘었어요! 2025 테크포임팩트 캠퍼스 2학기 시작!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/14j0zDKKYeI4TpaenC9MH5shArq5_G6zq" alt="워크샵" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1EtLGk-Ky_9bEK3NdjXQogd5enGFWqVA7" alt="개강워크샵" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1N9LN0aNpRjLlb-QXlC-JnF1KuMZteeIv" alt="워크샵" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2025. 09</span></div>
+      <div class="event-header"><span class="event-date">2025. 09</span><span class="event-name">기후테크 스타트업 서밋</span></div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🌍</div>
+        <div class="bubble-body">
+          <div class="bubble-name">제 4회 기후테크 스타트업 서밋</div>
+          <div class="bubble-text">기후문제를 해결하는 스타트업이 더 많아지도록, 생태계를 지원하다</div>
+        </div>
+      </div>
+      <div class="photo-grid-2">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1CMkhV6j_jmyT_HzLDPIiXxJ799HR168Z" alt="기후테크 서밋" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/12u6L18tplgL4u_gJRuwWrSL3j7gHfxhd" alt="기후테크 서밋" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=225" target="_blank">
+      <span class="news-tag tag-news">보도</span>
+      <div class="news-content">
+        <h4>기후기술과 AI, 미래를 다시 쓰다 — '2025 기후테크 스타트업 서밋' 개최</h4>
+        <p>기후 위기 대응을 위한 기후기술 생태계 활성화. →</p>
+      </div>
+    </a>
+
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2025. 11</span></div>
+      <div class="event-header"><span class="event-date">2025. 11</span><span class="event-name">AI TOP 100</span></div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🤖</div>
+        <div class="bubble-body">
+          <div class="bubble-name">AI TOP 100</div>
+          <div class="bubble-text">AI를 잘 쓴다는 건 뭘까? 능력자들 100명을 한자리에!</div>
+        </div>
+      </div>
+      <div class="photo-grid-2">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1qR0InWppb_jIohIVZxD0bWOsVyky_5I8" alt="AI TOP 100" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/100MjMQvtH3Dpahj5pAcP9Zeox42JFZYm" alt="AI TOP 100" loading="lazy"></div>
+      </div>
+    </div>
+
+    <a class="news-card reveal" href="https://kakaoimpact.org/news/view?atclId=240" target="_blank">
+      <span class="news-tag tag-news">보도</span>
+      <div class="news-content">
+        <h4>카카오 'AI TOP 100' 경진대회 성료 — AI 시대 새로운 문제해결 실험</h4>
+        <p>AI와 문제 해결할 사람 찾는다. →</p>
+      </div>
+    </a>
+
+
+
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2025. 12</span></div>
+      <div class="event-header">
+        <span class="event-date">2025. 12</span>
+        <span class="event-name">테크포임팩트 랩 최종성과공유회</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">💡</div>
+        <div class="bubble-body">
+          <div class="bubble-name">테크포임팩트 LAB</div>
+          <div class="bubble-text">기술 전문가들과 사회 혁신가들이 함께 만든 일곱 개의 돕는 기술, 세상에 뿅!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1xYDFeJs70SujjK6Tmru2_rJzi0ubJKAS" alt="성과공유회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1yjMAV2bpkCsKhpKfUU29bMV7cPdVzUfZ" alt="공유회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/16lLwEsm6tK1y7v8Ec-rD4UqLYCylBiYY" alt="공유회" loading="lazy"></div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="timeline-line"></div>
+</section>
+
+<!-- ═══════════ Chapter 5: 8주년 ═══════════ -->
+<section id="year8">
+  <div class="chapter-divider reveal" style="background: var(--season-8th);">
+    <p class="chapter-number">Chapter 05</p>
+    <p class="chapter-years">2026</p>
+    <h2 class="chapter-title">여덟 번째 봄</h2>
+    <span class="chapter-keyword">8주년 · 돕는 AI</span>
+    <p class="chapter-desc">'세상을 돕는 AI는 어떤 모습일까'라는<br>질문을 가지고 내일을 준비합니다.</p>
+    <div class="chapter-accent"><span style="background:var(--kakao-yellow)"></span><span style="background:var(--warm-orange)"></span><span style="background:var(--mint)"></span></div>
+  </div>
+
+  <div class="content-section">
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2026. 02</span></div>
+      <div class="event-header">
+        <span class="event-date">2026. 02</span>
+        <span class="event-name">사이좋은 AI 포럼</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🤔</div>
+        <div class="bubble-body">
+          <div class="bubble-name">사이좋은 AI 포럼</div>
+          <div class="bubble-text">AI시대에 교육은 어떤 모습이어야 할까요?</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1Sthu_Zv_CpVAsu-Wa50vfXAqilydRVXi" alt="AI 포럼" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/163JpXOL_XI26vgB_U-PiGgtEwXeHKScC" alt="AI 포럼" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1ZxfWNqv0dPfZOzMoQjNWFkaZl53HVxoF" alt="사이좋은 AI 포럼" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="event-block msg-right reveal">
+      <div class="date-divider reveal"><span>2026. 03</span></div>
+      <div class="event-header">
+        <span class="event-date">2026. 03</span>
+        <span class="event-name">이사회</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">💬</div>
+        <div class="bubble-body">
+          <div class="bubble-name">카카오임팩트 이사회</div>
+          <div class="bubble-text">언제나 시간이 모자란 이사회. 이번에도 영감 가득한 시간!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/186Vegb4XFuPjj3oEqTE8asbstw74qFxF" alt="이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1Re4fM_HKeH9OHRCTDDf0xyCHlIEscWdC" alt="이사회" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1URWCYEBtkV8YGBinxiCTDy8Ta5sX1W2t" alt="이사회" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="event-block msg-left reveal">
+      <div class="date-divider reveal"><span>2026. 04</span></div>
+      <div class="event-header">
+        <span class="event-date">2026. 04</span>
+        <span class="event-name">AI TOP 100 CAMPUS</span>
+      </div>
+      <div class="comment-bubble bubble-yellow reveal">
+        <div class="bubble-avatar">🏅</div>
+        <div class="bubble-body">
+          <div class="bubble-name">AI TOP 100 CAMPUS</div>
+          <div class="bubble-text">"AI를 잘 쓴다는 것은 뭘까?" 이번엔 학생들을 위한 경진대회!</div>
+        </div>
+      </div>
+      <div class="photo-grid-3">
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1QH1tvUdvbzVDaC4U1Jb0uzr8LuWUkJOo" alt="AI TOP 100" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/1TEdD8eOG3zflVQ9-kjhPmpgI0_0ZL4TO" alt="AI TOP 100" loading="lazy"></div>
+        <div class="photo-item"><img src="https://lh3.googleusercontent.com/d/19S9rH8HP-POh7YBnH_B0icOGZN7IJGVm" alt="AI TOP 100" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ Outro ═══════════ -->
+<section class="outro">
+  <h2 class="reveal">돕는AI로<br>필요한 미래를 더 가깝게</h2>
+  <p class="reveal reveal-delay-1" style="font-size:.95rem; font-weight:400; margin-bottom:2rem;">카카오임팩트의 여정은 계속됩니다</p>
+  <p class="outro-date reveal reveal-delay-2">2018. 04. 10 — ∞</p>
+</section>
+
+<footer class="footer">
+  <p>© 2026 카카오임팩트. 여덟 번째 봄을 축하합니다.</p>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+let lastScroll = 0;
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  const cur = window.pageYOffset;
+  nav.style.transform = (cur > lastScroll && cur > 100) ? 'translateY(-100%)' : 'translateY(0)';
+  lastScroll = cur;
+}, { passive: true });
+</script>
+</body>
+</html>
